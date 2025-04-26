@@ -3,43 +3,46 @@ import { Tabs } from "expo-router";
 
 export default function TabLayout() {
   return (
-    <Tabs screenOptions={{ tabBarActiveTintColor: "teal" }}>
+    <Tabs
+      screenOptions={{
+        tabBarActiveTintColor: "teal",
+        tabBarStyle: { height: 65 },
+      }}
+    >
       <Tabs.Screen
         name="index"
         options={{
           title: "Home",
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="home" size={size} color={color} />
-          ),
+          tabBarIcon: getTabIcon("home-outline"),
         }}
       />
       <Tabs.Screen
         name="budgets"
         options={{
           title: "Budgets",
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="wallet" size={size} color={color} />
-          ),
+          tabBarIcon: getTabIcon("wallet-outline"),
         }}
       />
       <Tabs.Screen
         name="analitics"
         options={{
           title: "Analitics",
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="pie-chart" size={size} color={color} />
-          ),
+          tabBarIcon: getTabIcon("pie-chart-outline"),
         }}
       />
       <Tabs.Screen
         name="settings"
         options={{
           title: "Settings",
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="settings" size={size} color={color} />
-          ),
+          tabBarIcon: getTabIcon("settings-outline"),
         }}
       />
     </Tabs>
   );
+}
+
+function getTabIcon(iconName: keyof typeof Ionicons.glyphMap) {
+  return function ({ color }: { color: string }) {
+    return <Ionicons name={iconName} size={28} color={color} />;
+  };
 }
